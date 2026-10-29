@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Table Builder · Thread Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#faf7f0;--ink:#1d2321;--muted:#5d6563;--line:#ddd6c8;--teal:#1F6F6B;--teal-soft:#e2efee;--gold:#B8762A;--gold-soft:#f6ead9;--card:#fff;--warn:#a5442f}
+@media (prefers-color-scheme:dark){:root{--paper:#161618;--ink:#ebebec;--muted:#a3a8a6;--line:#393639;--teal:#5FB3AD;--teal-soft:#1e2e2d;--gold:#D9A05B;--gold-soft:#2e2619;--card:#1f1f22;--warn:#e08b77}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 Newsreader,Georgia,serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:auto}
+header a{color:var(--teal);font-size:15px;text-decoration:none}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;margin:4px 0 2px;font-size:30px}
+.sub{color:var(--muted);margin:0 0 6px}
+main{max-width:1100px;margin:auto;padding:0 16px 60px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:14px 0}
+h2{font-family:Fraunces,Georgia,serif;font-size:19px;margin:0 0 10px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+label{display:block;font-size:14px;color:var(--muted)}
+input[type=text],textarea,select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:7px 9px}
+textarea{font-family:'IBM Plex Mono',monospace;font-size:13px;min-height:220px}
+.check{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--ink);margin-top:22px}
+button{font:inherit;font-size:15px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:6px;padding:6px 11px;cursor:pointer}
+button.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+button.gold{background:var(--gold);border-color:var(--gold);color:#fff}
+button.x{border:none;background:none;color:var(--muted);padding:0 4px;font-size:16px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.scroll{overflow-x:auto}
+table.ed{border-collapse:collapse;min-width:100%}
+table.ed th,table.ed td{border:1px solid var(--line);padding:0;vertical-align:top;min-width:150px}
+table.ed th{background:var(--teal-soft)}
+.cell{display:flex;align-items:flex-start;gap:2px;padding:4px}
+.cell input{border:none;background:transparent;padding:4px;font-size:16px}
+.cell input:focus{outline:2px solid var(--gold);border-radius:4px}
+.lk{border:none;background:none;padding:2px 4px;color:var(--muted);font-size:15px}
+.chip{display:inline-block;margin:0 4px 4px;padding:1px 8px;border-radius:999px;background:var(--gold-soft);color:var(--gold);font-size:13px;cursor:pointer}
+.chip.new{background:#fbe3dd;color:var(--warn)}
+.rowh{width:34px;min-width:34px!important;text-align:center;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);width:min(520px,94vw);padding:16px}
+dialog::backdrop{background:#0006}
+.results{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:6px;margin:8px 0}
+.results div{padding:7px 10px;cursor:pointer;border-bottom:1px solid var(--line)}
+.results div:hover,.results div.on{background:var(--teal-soft)}
+.results small{color:var(--muted);display:block;font-size:12px}
+.note{font-size:14px;color:var(--muted)}
+.todo li{margin:4px 0}
+.ok{color:var(--teal)}
+</style>
+</head>
+<body>
+<header>
+  <a href="/">← Thread Notes</a>
+  <h1>Table Builder</h1>
+  <p class="sub">Build a table where any cell links to another note. Each linked note can hold its own table, so you drill down layer by layer.</p>
+</header>
+<main>
+
+<section>
+  <h2>1 · This table</h2>
+  <div class="grid2">
+    <div><label>Title</label><input id="title" type="text" placeholder="e.g. Thyroid nodules"></div>
+    <div><label>Folder</label><input id="folder" type="text" list="folders" placeholder="e.g. Thyroid"><datalist id="folders"></datalist></div>
+    <div><label>Up (parent note)</label><input id="parent" type="text" list="notes" placeholder="e.g. index"><datalist id="notes"></datalist></div>
+    <div><label class="check"><input id="publish" type="checkbox" checked> Publish on the website</label></div>
+  </div>
+  <div style="margin-top:10px"><label>Description (one line)</label><input id="desc" type="text" placeholder="What this table is for"></div>
+</section>
+
+<section>
+  <h2>2 · Cells</h2>
+  <p class="note">Type in any cell. Tap 🔗 to link the cell to an existing note or to a new one. Gold chip = links to an existing note; red chip = new note to create.</p>
+  <div class="bar">
+    <button id="addRow">+ Row</button><button id="addCol">+ Column</button>
+    <button id="clear">Start over</button>
+  </div>
+  <div class="scroll"><table class="ed" id="grid"></table></div>
+</section>
+
+<section>
+  <h2>3 · Publish</h2>
+  <div class="bar">
+    <button class="primary" id="createGH">Create this note on GitHub</button>
+    <button id="copy">Copy markdown</button>
+  </div>
+  <p class="note">GitHub opens with the file filled in. Check it, then click <b>Commit changes</b>. It is live in about two minutes.</p>
+  <div id="todoWrap" hidden>
+    <h2 style="margin-top:14px">New notes your cells point to</h2>
+    <p class="note">Create each one so its link works. Each opens with "up" set to this table, ready for its own table.</p>
+    <ul class="todo" id="todo"></ul>
+  </div>
+  <details style="margin-top:10px"><summary>Preview markdown</summary><textarea id="out" readonly></textarea></details>
+</section>
+
+</main>
+
+<dialog id="dlg">
+  <h2>Link this cell</h2>
+  <input id="q" type="text" placeholder="Search notes, or type a new note name" autocomplete="off">
+  <div class="results" id="res"></div>
+  <label>Optional: jump to a heading in that note</label>
+  <input id="anchor" type="text" placeholder="e.g. Logic">
+  <div class="bar" style="justify-content:flex-end">
+    <button id="unlink">Remove link</button><button id="cancel">Cancel</button><button class="primary" id="useNew">Link</button>
+  </div>
+</dialog>
+
+<script>
+const REPO="https://github.com/teamthreadmed/threadmed-notes";
+const KEY="tn-table-builder-draft";
+let notes=[];            // {title, slug, path}
+let state={title:"",folder:"",parent:"index",publish:true,desc:"",cols:["Item","Details"],rows:[[{t:""},{t:""}],[{t:""},{t:""}]]};
+const $=id=>document.getElementById(id);
+
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function load(){try{const s=localStorage.getItem(KEY);if(s)state=Object.assign(state,JSON.parse(s))}catch(e){}}
+
+// URL params let a note open the builder pre-filled: ?parent=Tobacco&folder=History/Social history
+function fromURL(){const p=new URLSearchParams(location.search);
+  if(p.get("parent")){state.parent=p.get("parent");state.title=p.get("title")||state.title;state.folder=p.get("folder")||state.folder}}
+
+async function loadIndex(){
+  try{const r=await fetch("/static/contentIndex.json");const d=await r.json();
+    notes=Object.values(d).map(n=>({title:n.title,slug:n.slug,path:n.filePath||""}))
+      .filter(n=>!n.slug.startsWith("tags"));
+    $("notes").innerHTML=notes.map(n=>`<option value="${esc(n.title)}">`).join("");
+    const folders=[...new Set(notes.map(n=>n.path.split("/").slice(0,-1).join("/")).filter(Boolean))].sort();
+    $("folders").innerHTML=folders.map(f=>`<option value="${esc(f)}">`).join("");
+    render();
+  }catch(e){console.log("index unavailable",e)}
+}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const exists=t=>notes.some(n=>n.title.toLowerCase()===String(t).toLowerCase());
+const slugOf=t=>(notes.find(n=>n.title.toLowerCase()===String(t).toLowerCase())||{}).slug;
+
+function bindMeta(){
+  for(const k of ["title","folder","parent","desc"]){$(k).value=state[k]||"";$(k).oninput=()=>{state[k]=$(k).value;save();output()}}
+  $("publish").checked=state.publish;$("publish").onchange=()=>{state.publish=$("publish").checked;save();output()};
+}
+
+function render(){
+  const g=$("grid");let h="<tr><th class='rowh'></th>";
+  state.cols.forEach((c,i)=>{h+=`<th><div class="cell"><input data-col="${i}" value="${esc(c)}" aria-label="Column ${i+1} name"><button class="x" data-delcol="${i}" title="Delete column">×</button></div></th>`});
+  h+="</tr>";
+  state.rows.forEach((row,r)=>{h+=`<tr><td class="rowh"><button class="x" data-delrow="${r}" title="Delete row">×</button></td>`;
+    row.forEach((cell,c)=>{
+      const chip=cell.link?`<span class="chip ${exists(cell.link)?"":"new"}" data-edit="${r},${c}">→ ${esc(cell.link)}${cell.anchor?" #"+esc(cell.anchor):""}</span>`:"";
+      h+=`<td><div class="cell"><input data-cell="${r},${c}" value="${esc(cell.t)}" aria-label="Row ${r+1} column ${c+1}"><button class="lk" data-edit="${r},${c}" title="Link cell">🔗</button></div>${chip}</td>`});
+    h+="</tr>"});
+  g.innerHTML=h;
+  g.querySelectorAll("[data-col]").forEach(el=>el.oninput=()=>{state.cols[+el.dataset.col]=el.value;save();output()});
+  g.querySelectorAll("[data-cell]").forEach(el=>el.oninput=()=>{const[r,c]=el.dataset.cell.split(",").map(Number);state.rows[r][c].t=el.value;save();output()});
+  g.querySelectorAll("[data-edit]").forEach(el=>el.onclick=()=>openLink(...el.dataset.edit.split(",").map(Number)));
+  g.querySelectorAll("[data-delcol]").forEach(el=>el.onclick=()=>{if(state.cols.length<2)return;const i=+el.dataset.delcol;state.cols.splice(i,1);state.rows.forEach(r=>r.splice(i,1));save();render()});
+  g.querySelectorAll("[data-delrow]").forEach(el=>el.onclick=()=>{if(state.rows.length<2)return;state.rows.splice(+el.dataset.delrow,1);save();render()});
+  output();
+}
+
+let cur=null,sel=-1,hits=[];
+function openLink(r,c){cur={r,c};const cell=state.rows[r][c];$("q").value=cell.link||cell.t||"";$("anchor").value=cell.anchor||"";search();$("dlg").showModal();$("q").focus()}
+function search(){const q=$("q").value.trim().toLowerCase();
+  hits=q?notes.filter(n=>n.title.toLowerCase().includes(q)||n.path.toLowerCase().includes(q)).slice(0,30):notes.slice(0,30);sel=-1;
+  $("res").innerHTML=hits.map((n,i)=>`<div data-i="${i}">${esc(n.title)}<small>${esc(n.path)}</small></div>`).join("")||`<div style="cursor:default">No match. "Link" will create a new note called <b>${esc($("q").value)}</b>.</div>`;
+  $("res").querySelectorAll("[data-i]").forEach(el=>el.onclick=()=>pick(hits[+el.dataset.i].title));
+}
+function pick(title){const cell=state.rows[cur.r][cur.c];cell.link=title.trim();cell.anchor=$("anchor").value.trim();if(!cell.t)cell.t=cell.link;$("dlg").close();save();render()}
+$("q").oninput=search;
+$("q").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();sel>=0&&hits[sel]?pick(hits[sel].title):$("q").value.trim()&&pick($("q").value)}
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();sel=Math.max(0,Math.min(hits.length-1,sel+(e.key==="ArrowDown"?1:-1)));[...$("res").children].forEach((d,i)=>d.classList.toggle("on",i===sel))}};
+$("useNew").onclick=()=>{$("q").value.trim()&&pick($("q").value)};
+$("unlink").onclick=()=>{const cell=state.rows[cur.r][cur.c];delete cell.link;delete cell.anchor;$("dlg").close();save();render()};
+$("cancel").onclick=()=>$("dlg").close();
+
+$("addRow").onclick=()=>{state.rows.push(state.cols.map(()=>({t:""})));save();render()};
+$("addCol").onclick=()=>{state.cols.push("Column "+(state.cols.length+1));state.rows.forEach(r=>r.push({t:""}));save();render()};
+$("clear").onclick=()=>{if(!confirm("Clear this table and start over?"))return;try{localStorage.removeItem(KEY)}catch(e){};location.href=location.pathname};
+
+// ---------- markdown ----------
+const cellMd=c=>{const txt=(c.t||"").replace(/\|/g,"\\|").replace(/\n/g," ");
+  if(!c.link)return txt;const target=c.link+(c.anchor?"#"+c.anchor:"");
+  return (txt&&txt!==c.link)?`[[${target}\\|${txt}]]`:`[[${target}]]`};
+const yamlStr=s=>JSON.stringify(String(s||""));
+function noteMd(){
+  const s=state,lines=["---",`title: ${yamlStr(s.title||"Untitled table")}`,`publish: ${s.publish}`,"type: table",
+    `up: ${yamlStr("[["+(s.parent||"index")+"]]")}`,`parent: ${yamlStr(s.parent||"index")}`,`description: ${yamlStr(s.desc)}`,
+    `version_date: ${new Date().toISOString().slice(0,10)}`,"---"];
+  if(s.desc)lines.push(s.desc,"");
+  lines.push("| "+s.cols.map(c=>c.replace(/\|/g,"\\|")).join(" | ")+" |","| "+s.cols.map(()=>"---").join(" | ")+" |");
+  s.rows.forEach(r=>lines.push("| "+r.map(cellMd).join(" | ")+" |"));
+  return lines.join("\n")+"\n";
+}
+function stubMd(name){return ["---",`title: ${yamlStr(name)}`,`publish: ${state.publish}`,"type: note",
+  `up: ${yamlStr("[["+(state.title||"index")+"]]")}`,`parent: ${yamlStr(state.title||"index")}`,`description: ""`,
+  `version_date: ${new Date().toISOString().slice(0,10)}`,"---",`Up: [[${state.title||"index"}]]`,"","Add text here, or build a table for this note:",
+  `[Open the Table Builder for this note](/static/table-builder.html?parent=${encodeURIComponent(name)}&title=${encodeURIComponent(name+" table")}&folder=${encodeURIComponent(folderPath())})`,""].join("\n")}
+const folderPath=()=>(state.folder||"").replace(/^\/+|\/+$/g,"");
+const fileOf=name=>"content/"+(folderPath()?folderPath()+"/":"")+name.replace(/[\\/:*?"<>|#^\[\]]/g,"-")+".md";
+const ghNew=(name,md)=>`${REPO}/new/main?filename=${encodeURIComponent(fileOf(name))}&value=${encodeURIComponent(md)}`;
+
+function output(){
+  $("out").value=noteMd();
+  const missing=[...new Set(state.rows.flat().filter(c=>c.link&&!exists(c.link)).map(c=>c.link))];
+  $("todoWrap").hidden=!missing.length;
+  $("todo").innerHTML=missing.map(m=>`<li>${esc(m)} <button class="gold" data-stub="${esc(m)}">Create on GitHub</button></li>`).join("");
+  $("todo").querySelectorAll("[data-stub]").forEach(b=>b.onclick=()=>window.open(ghNew(b.dataset.stub,stubMd(b.dataset.stub)),"_blank"));
+}
+$("createGH").onclick=()=>{if(!state.title.trim()){alert("Give the table a title first.");$("title").focus();return}window.open(ghNew(state.title.trim(),noteMd()),"_blank")};
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(noteMd());$("copy").textContent="Copied ✓";setTimeout(()=>$("copy").textContent="Copy markdown",1500)}catch(e){$("out").closest("details").open=true;$("out").select()}};
+
+load();fromURL();bindMeta();render();loadIndex();
+</script>
+</body>
+</html>
