@@ -1,6 +1,6 @@
 ---
 visibility: private
-publish: false
+publish: true
 type: drug
 up: "[[SERMs and hormone therapy]]"
 source: "FDA label; AACE/ACE 2020 PMO"
