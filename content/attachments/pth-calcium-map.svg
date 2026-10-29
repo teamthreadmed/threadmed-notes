@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" font-family="Georgia, 'Newsreader', serif">
+  <rect width="960" height="700" fill="#faf7f0"/>
+  <text x="480" y="38" text-anchor="middle" font-size="24" font-weight="bold" fill="#1d2321">PTH–calcium map</text>
+  <text x="480" y="62" text-anchor="middle" font-size="14" fill="#4e4e4e">Read PTH against simultaneous calcium: "normal" PTH is inappropriate when calcium is abnormal</text>
+
+  <!-- axes labels -->
+  <text x="40" y="380" font-size="16" fill="#1d2321" transform="rotate(-90 40 380)" text-anchor="middle" font-weight="bold">Intact PTH</text>
+  <text x="70" y="168" font-size="13" fill="#4e4e4e" text-anchor="middle">High</text>
+  <text x="70" y="358" font-size="13" fill="#4e4e4e" text-anchor="middle">Normal</text>
+  <text x="70" y="378" font-size="11" fill="#4e4e4e" text-anchor="middle">(~15–65)</text>
+  <text x="70" y="548" font-size="13" fill="#4e4e4e" text-anchor="middle">Low</text>
+  <text x="530" y="660" font-size="16" fill="#1d2321" text-anchor="middle" font-weight="bold">Serum calcium (albumin-corrected or ionized)</text>
+  <text x="230" y="632" font-size="13" fill="#4e4e4e" text-anchor="middle">Low</text>
+  <text x="530" y="632" font-size="13" fill="#4e4e4e" text-anchor="middle">Normal (~8.5–10.2 mg/dL)</text>
+  <text x="830" y="632" font-size="13" fill="#4e4e4e" text-anchor="middle">High</text>
+
+  <g stroke="#faf7f0" stroke-width="6">
+    <!-- Low Ca, high PTH: secondary HPT -->
+    <rect x="100" y="80" width="260" height="180" fill="#d9e8e7"/>
+    <!-- Normal Ca, high PTH -->
+    <rect x="400" y="80" width="260" height="180" fill="#e4eeed"/>
+    <!-- High Ca, high+normal PTH: PTH-dependent -->
+    <rect x="700" y="80" width="240" height="370" fill="#f1dfc6"/>
+    <!-- Low Ca, normal+low PTH: hypopara -->
+    <rect x="100" y="270" width="260" height="330" fill="#cfe0f0"/>
+    <!-- Normal/normal -->
+    <rect x="400" y="270" width="260" height="180" fill="#ffffff"/>
+    <!-- Normal Ca, low PTH -->
+    <rect x="400" y="460" width="260" height="140" fill="#eeeeee"/>
+    <!-- High Ca, low PTH: PTH-independent -->
+    <rect x="700" y="460" width="240" height="140" fill="#f3d3cd"/>
+  </g>
+
+  <g font-size="14" fill="#1d2321">
+    <text x="115" y="108" font-weight="bold" font-size="15">Secondary hyperparathyroidism</text>
+    <text x="115" y="132">• Vitamin D deficiency</text>
+    <text x="115" y="152">• CKD</text>
+    <text x="115" y="172">• Malabsorption, low Ca intake</text>
+    <text x="115" y="192">• PTH resistance</text>
+    <text x="127" y="210">(pseudohypoparathyroidism)</text>
+
+    <text x="415" y="108" font-weight="bold" font-size="15">Secondary HPT vs</text>
+    <text x="415" y="127" font-weight="bold" font-size="15">normocalcemic PHPT</text>
+    <text x="415" y="152">Exclude first: low 25-OH D,</text>
+    <text x="415" y="172">eGFR &lt; 60, loop diuretics,</text>
+    <text x="415" y="192">lithium, low Ca intake,</text>
+    <text x="415" y="212">recent antiresorptive</text>
+    <text x="415" y="236" font-style="italic" font-size="13">Check ionized Ca</text>
+
+    <text x="715" y="108" font-weight="bold" font-size="15">PTH-dependent</text>
+    <text x="715" y="127" font-weight="bold" font-size="15">hypercalcemia</text>
+    <text x="715" y="154">• Primary HPT</text>
+    <text x="727" y="172" font-size="13">(PTH high or</text>
+    <text x="727" y="189" font-size="13">inappropriately normal)</text>
+    <text x="715" y="214">• FHH: urine Ca/Cr</text>
+    <text x="727" y="232" font-size="13">clearance ratio &lt; 0.01</text>
+    <text x="715" y="257">• Tertiary HPT (CKD,</text>
+    <text x="727" y="275" font-size="13">post-transplant)</text>
+    <text x="715" y="300">• Lithium</text>
+    <text x="715" y="335" font-style="italic" font-size="13">Next: 24-h urine Ca,</text>
+    <text x="715" y="353" font-style="italic" font-size="13">Ca/Cr clearance ratio,</text>
+    <text x="715" y="371" font-style="italic" font-size="13">25-OH D, eGFR</text>
+
+    <text x="115" y="298" font-weight="bold" font-size="15">Hypoparathyroidism</text>
+    <text x="127" y="317" font-size="13">(PTH low or inappropriately normal)</text>
+    <text x="115" y="344">• Post-surgical (most common)</text>
+    <text x="115" y="364">• Autoimmune, infiltrative</text>
+    <text x="115" y="384">• Genetic (incl. activating CaSR,</text>
+    <text x="127" y="402">ADH1)</text>
+    <text x="115" y="427">• Hypomagnesemia</text>
+    <text x="127" y="445" font-size="13">(severe low Mg suppresses PTH;</text>
+    <text x="127" y="463" font-size="13">mild low Mg causes resistance)</text>
+    <text x="115" y="498" font-style="italic" font-size="13">Next: Mg, phosphate, 25-OH D,</text>
+    <text x="115" y="516" font-style="italic" font-size="13">surgical / family history</text>
+
+    <text x="530" y="355" text-anchor="middle" font-weight="bold" font-size="16" fill="#1F6F6B">Normal axis</text>
+
+    <text x="415" y="490" font-weight="bold" font-size="15">Uncommon pattern</text>
+    <text x="415" y="514">Recheck: assay issue,</text>
+    <text x="415" y="534">low Mg, timing after</text>
+    <text x="415" y="554">parathyroid surgery</text>
+
+    <text x="715" y="488" font-weight="bold" font-size="15">PTH-independent</text>
+    <text x="715" y="508">• Malignancy (PTHrP,</text>
+    <text x="727" y="525" font-size="13">osteolysis, myeloma)</text>
+    <text x="715" y="545">• Calcitriol excess (granuloma,</text>
+    <text x="727" y="562" font-size="13">lymphoma); vitamin D toxicity</text>
+    <text x="715" y="582" font-size="13">• Milk-alkali, thyrotoxicosis, immobility</text>
+  </g>
+
+  <text x="480" y="688" text-anchor="middle" font-size="11" fill="#646464">Original schematic. Reference ranges are approximate and assay-dependent. Thread Notes, notes.threadmed.org</text>
+</svg>
