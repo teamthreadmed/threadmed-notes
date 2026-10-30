@@ -8,6 +8,7 @@ A working clinical notebook by Anthony Pick, MD, CDCES, CCD, MSCP, in the [Threa
 ## Start here
 - [[History]]: the structured medical history, one source of truth for every field
 - [[Gates]]: logic gates, each listing the History fields it reads
+- [[Disease State Education]]: plain-language teaching on common conditions
 - [[Teaching]]: original teaching diagrams
 - [[Tools]]: the Table Builder
 
