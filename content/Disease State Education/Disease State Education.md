@@ -11,7 +11,8 @@ Teaching notes for patients and the clinicians who teach them. Each note is buil
 ## Sections
 - [[Cardiometabolic]]: atherosclerosis, cholesterol, diabetes, weight, blood pressure
 - [[Osteoporosis education|Osteoporosis]]: bone strength, fracture risk, treatment
-- [[Other conditions]]: thyroid, menopause, adrenal and pituitary
+- [[Menopause]]: the transition, symptoms and treatment
+- [[Other conditions]]: thyroid, adrenal and pituitary
 
 ```base
 filters:

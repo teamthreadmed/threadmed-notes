@@ -9,10 +9,9 @@ version_date: 2026-10-30
 Osteoporosis means bone has lost strength, so it breaks with a fall from standing height or less. It causes no symptoms until a fracture, which is why we measure risk.
 
 ## Notes
-Teaching images to be added.
+- [[Reading a DXA report]]
 
 ## Planned
-- What a DXA scan measures (T-score, Z-score)
 - Fracture risk beyond the T-score (FRAX, prior fracture)
 - How bone remodels, and how each drug class changes it
 - Drug holidays and stopping denosumab safely

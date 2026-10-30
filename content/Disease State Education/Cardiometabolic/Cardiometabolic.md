@@ -10,9 +10,10 @@ Heart attack and stroke share one root process: cholesterol-carrying particles c
 
 ## Notes
 - [[Coronary atherosclerosis]]
+- [[Coronary artery calcium score]]
+- [[Plaque regression with LDL lowering]]
 
 ## Planned
 - LDL, apoB and Lp(a): what the numbers mean
-- Coronary artery calcium score
 - Insulin resistance and type 2 diabetes
 - Obesity as a chronic disease
